@@ -39,20 +39,20 @@ This method contains the <b>test assertions</b> for the generateFamilies method.
    1.1 Inside the repository, click in code and copy the URL
 
     1.2 inside terminal use the code bellow:
-    `git 
-  git clone <https://github.com/camileRighetti/-salesforce-account-contact--mapping.git> 
- `
 
-    1.3 Afte clonning the project, authorize your org using SFDX and then save the new classes you have cloned. This will make the classes be saved inside your org.
+    ```git
+     git clone <https://github.com/camileRighetti/-salesforce-account-contact--mapping.git>
+    ```
+
+    1.3 After clonning the project, authorize your org using SFDX and then save the new classes you have cloned. This will make the classes be saved inside your org.
 
 2. Now you are able to test the classes inside developer console
    2.1 Past the below code inside developer console, this will execute the tests and create the necessary records.
-    ````Apex
-     Main.run();
-     ```
+    ```apex
+      Main.run();
+    ```
     ![ezgif com-crop (4)](https://user-images.githubusercontent.com/122564426/232839610-0f9f0a67-685d-4c85-b6c8-d2c06045f254.gif)
     Note that 3 new Accounts were insert.
-    ````
 
 > Note that the Main class contains test assertions that can be used to validate the class behavior, If you want to modify the code, make sure the tests still pass after the changes.
 
