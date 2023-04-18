@@ -19,7 +19,7 @@ This method receives two parameters, firstName and lastName, and creates Contact
 <h5>getFamilies</h5>
 This method receives a lastName parameter and returns a list of possible family group names based on the last name. It retrieves a list of last names by splitting the lastName parameter by space, and then returns all possible combinations of those last names.
 
-<h5>Main</h5>
+<h4>Main</h4>
 This is an auxiliary class that runs a sequence of methods to create and test the Contacts class. It contains the following methods:
 
 <h5>run</h5>
@@ -32,9 +32,39 @@ This method creates a list of Account records with names representing family gro
 This method contains the <b>test assertions</b> for the generateFamilies method. It retrieves the created Accounts and Contact records and checks if the expected number of Contact records were created for each family group.
 
 <h3>How to Use</h3>
-To use this class, you need to have access to a Salesforce org and have the necessary permissions to create Apex classes and execute anonymous Apex.
 
-Copy the code of the Contacts and Main classes.
-Create a new Apex class in your Salesforce org and paste the code.
-Open the Developer Console and execute the Main.run() method. This will execute the tests and create the necessary records.
-Note that the Main class contains test assertions that can be used to validate the class behavior. If you want to modify the code, make sure the tests still pass after the changes.
+> Note: to use these classes, you need to have access to a Salesforce org and have Account and Contact objects.
+
+1. Clone the project and save the classes inside your org:
+   1.1 Inside the repository, click in code and copy the URL
+
+    1.2 inside terminal use the code bellow:
+    `git 
+  git clone <https://github.com/camileRighetti/-salesforce-account-contact--mapping.git> 
+ `
+
+    1.3 Afte clonning the project, authorize your org using SFDX and then save the new classes you have cloned. This will make the classes be saved inside your org.
+
+2. Now you are able to test the classes inside developer console
+   2.1 Past the below code inside developer console, this will execute the tests and create the necessary records.
+    ````Apex
+     Main.run();
+     ```
+    ![ezgif com-crop (4)](https://user-images.githubusercontent.com/122564426/232839610-0f9f0a67-685d-4c85-b6c8-d2c06045f254.gif)
+    Note that 3 new Accounts were insert.
+    ````
+
+> Note that the Main class contains test assertions that can be used to validate the class behavior, If you want to modify the code, make sure the tests still pass after the changes.
+
+3. Verify account and it's contacts
+   Inside the new Accounts inserted, was also created it's related contacts.
+
+![ezgif com-crop (5)](https://user-images.githubusercontent.com/122564426/232843439-22fc68fa-21ed-4555-9c08-eaa78b8519b7.gif)
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
