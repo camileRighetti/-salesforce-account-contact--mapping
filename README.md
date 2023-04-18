@@ -54,6 +54,7 @@ This method contains the <b>test assertions</b> for the generateFamilies method.
       Main.run();
     ```
     ![ezgif com-crop (4)](https://user-images.githubusercontent.com/122564426/232839610-0f9f0a67-685d-4c85-b6c8-d2c06045f254.gif)
+    
     Note that 3 new Accounts were insert.
 
 > Note that the Main class contains test assertions that can be used to validate the class behavior, If you want to modify the code, make sure the tests still pass after the changes.
