@@ -1,6 +1,6 @@
 <img src="https://img.shields.io/badge/Database-SOQL-blue"> <img src="https://img.shields.io/badge/-Apex-blue"> <img src=https://img.shields.io/badge/license-MIT-blue>
 
-<img src="image/images/SalesforceCodex_Apex.png" align="right" width="300">
+<img src="images/SalesforceCodex_Apex.png" align="right" width="300">
 
 #Salesforce Account Related Contacts Creator
 This Salesforce Apex class provides a method to create Contact records based on the last name of a family group. The class contains two methods, one to create the Contact records and another to retrieve the family groups based on the last name.
