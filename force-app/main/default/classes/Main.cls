@@ -6,20 +6,20 @@ public with sharing class Main {
     }
 
     private static void generateFamilies() {
-        //cria account
         Account souza = new Account(Name = 'Souza');
         Account souzaSilva = new Account(Name = 'Souza Silva');
         Account silva = new Account(Name = 'silva');
+
         //insere as 3 account atraves de list
         insert new List<Account>{ silva, souza, souzaSilva };
 
         List<Contact> members = new List<Contact>{};
-        members.addAll(Contacts.createMembers('Ana', 'Souza')); //createMember é um metodo de Contacts e recebe uma List<Contact>
+        members.addAll(Contacts.createMembers('Ana', 'Souza')); //createMember é um metodo de Contacts e retorna uma List<Contact>
         members.addAll(Contacts.createMembers('Maria', 'Silva'));
         members.addAll(Contacts.createMembers('Ana Maria', 'Souza Silva'));
         insert members;
-        //insere a lista membros no salesforce
-        //membros são contatos, criado com
+        //cada lista member, tera uma lista atribuida. Essa lista tera o retorno de createMember
+        //com os contatos criados para cada conta iterada.
     }
 
     /**

@@ -4,21 +4,18 @@ public with sharing class Contacts {
         //apos retornar as familias, deve ser possivel pegar o id de cada account > soql
         //apos pegar o valor de cada account pode atribuir ao campo de account id do contato
 
-        //List<Contact> alreadyExists = [SELECT Id FROM Contact WHERE FirstName = :firstName AND LastName = :lastName];
-
         List<String> lastNameGetFamily = getFamilies(lastName);
         List<Account> accs = [SELECT Id, Name, (SELECT Id, FirstName, LastName, AccountId FROM Contacts) FROM Account WHERE Name IN :lastNameGetFamily]; //retorna os ids de cada nome da lista que recebe o metodo getFamilies
 
-        List<Contact> updateAccContacts = new List<Contact>();
+        List<Contact> createdContacts = new List<Contact>();
 
         for (Account acc : accs) {
-            Contact contactEachAcc = new Contact(FirstName = firstName, LastName = lastName);
-            contactEachAcc.AccountId = acc.Id;
-            updateAccContacts.add(contactEachAcc);
+            Contact contactForCurrentAccount = new Contact(FirstName = firstName, LastName = lastName);
+            contactForCurrentAccount.AccountId = acc.Id;
+            createdContacts.add(contactForCurrentAccount);
         }
 
-        //insert updateAccContacts;
-        return updateAccContacts;
+        return createdContacts;
     }
 
     public static List<String> getFamilies(String lastName) {
