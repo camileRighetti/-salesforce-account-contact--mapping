@@ -48,6 +48,7 @@ This method contains the <b>test assertions</b> for the generateFamilies method.
     1.3 After clonning the project, authorize your org using SFDX and then save the new classes you have cloned. This will make the classes be saved inside your org.
 
 2. Now you are able to test the classes inside developer console
+
    2.1 Past the below code inside developer console, this will execute the tests and create the necessary records.
     ```apex
       Main.run();
