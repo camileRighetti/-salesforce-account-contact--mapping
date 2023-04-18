@@ -36,7 +36,8 @@ This method contains the <b>test assertions</b> for the generateFamilies method.
 > Note: to use these classes, you need to have access to a Salesforce org and have Account and Contact objects.
 
 1. Clone the project and save the classes inside your org:
-   1.1 Inside the repository, click in code and copy the URL
+
+    1.1 Inside the repository, click in code and copy the URL
 
     1.2 inside terminal use the code bellow:
 
