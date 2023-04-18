@@ -1,18 +1,38 @@
-# Salesforce DX Project: Next Steps
+<img src="https://img.shields.io/badge/Database-SOQL-blue"> <img src="https://img.shields.io/badge/-Apex-blue"> <img src=https://img.shields.io/badge/license-MIT-blue>
+<img src="image/../images/SalesforceCodex_Apex.png" align="right" width="300">  
+#Salesforce Account Related Contacts Creator
+This Salesforce Apex class provides a method to create Contact records based on the last name of a family group. The class contains two methods, one to create the Contact records and another to retrieve the family groups based on the last name.
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+###Use cases
+This project can be used in any business context that requires creating multiple Contact records based on a Account Name, such as healthcare providers or financial institutions.
 
-## How Do You Plan to Deploy Your Changes?
+###Class Description
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+####Contacts
+This is the main class that contains the following methods:
 
-## Configure Your Salesforce DX Project
+#####createMembers
+This method receives two parameters, firstName and lastName, and creates Contact records based on the family groups associated with the lastName parameter. It retrieves the family groups by calling the getFamilies method, then retrieves the Accounts associated with those family groups and creates a new Contact record for each one. The method returns a list of the created Contact records.
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+#####getFamilies
+This method receives a lastName parameter and returns a list of possible family group names based on the last name. It retrieves a list of last names by splitting the lastName parameter by space, and then returns all possible combinations of those last names.
 
-## Read All About It
+#####Main
+This is an auxiliary class that runs a sequence of methods to create and test the Contacts class. It contains the following methods:
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+#####run
+This method is used to execute the methods necessary to test the Contacts class, such as clearing existing records, creating new records, and running test assertions.
+
+#####generateFamilies
+This method creates a list of Account records with names representing family groups, such as 'Souza', 'Silva', and 'Souza Silva'. It then calls the createMembers method of the Contacts class with different first and last name parameters for each family group, and inserts the resulting Contact records.
+
+####asserts
+This method contains the <b>test assertions</b> for the generateFamilies method. It retrieves the created Accounts and Contact records and checks if the expected number of Contact records were created for each family group.
+
+##How to Use
+To use this class, you need to have access to a Salesforce org and have the necessary permissions to create Apex classes and execute anonymous Apex.
+
+Copy the code of the Contacts and Main classes.
+Create a new Apex class in your Salesforce org and paste the code.
+Open the Developer Console and execute the Main.run() method. This will execute the tests and create the necessary records.
+Note that the Main class contains test assertions that can be used to validate the class behavior. If you want to modify the code, make sure the tests still pass after the changes.
