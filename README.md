@@ -60,6 +60,7 @@ This method contains the <b>test assertions</b> for the generateFamilies method.
 > Note that the Main class contains test assertions that can be used to validate the class behavior, If you want to modify the code, make sure the tests still pass after the changes.
 
 3. Verify account and it's contacts
+
    Inside the new Accounts inserted, was also created it's related contacts.
 
 ![ezgif com-crop (5)](https://user-images.githubusercontent.com/122564426/232843439-22fc68fa-21ed-4555-9c08-eaa78b8519b7.gif)
