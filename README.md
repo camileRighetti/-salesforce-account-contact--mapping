@@ -5,33 +5,33 @@
 
 <b>This Salesforce Apex project provides a method to create Contact records based on the last name of a family group. The class contains two methods, one to create the Contact records and another to retrieve the family groups based on the last name.</b>
 
-###Use cases
+<h3>Use cases</h3>
 This project can be used in any business context that requires creating multiple Contact records based on a Account Name, such as healthcare providers or financial institutions.
 
-###Class Description
+<h3>Class Description</h3>
 
-####Contacts
+<h4>Contacts</h4>
 This is the main class that contains the following methods:
 
-#####createMembers
+<h5>createMembers</h5>
 This method receives two parameters, firstName and lastName, and creates Contact records based on the family groups associated with the lastName parameter. It retrieves the family groups by calling the getFamilies method, then retrieves the Accounts associated with those family groups and creates a new Contact record for each one. The method returns a list of the created Contact records.
 
-#####getFamilies
+<h5>getFamilies</h5>
 This method receives a lastName parameter and returns a list of possible family group names based on the last name. It retrieves a list of last names by splitting the lastName parameter by space, and then returns all possible combinations of those last names.
 
-#####Main
+<h5>Main</h5>
 This is an auxiliary class that runs a sequence of methods to create and test the Contacts class. It contains the following methods:
 
-#####run
+<h5>run</h5>
 This method is used to execute the methods necessary to test the Contacts class, such as clearing existing records, creating new records, and running test assertions.
 
-#####generateFamilies
+<h5>generateFamilies</h5>
 This method creates a list of Account records with names representing family groups, such as 'Souza', 'Silva', and 'Souza Silva'. It then calls the createMembers method of the Contacts class with different first and last name parameters for each family group, and inserts the resulting Contact records.
 
-####asserts
+<h4>asserts</h4>
 This method contains the <b>test assertions</b> for the generateFamilies method. It retrieves the created Accounts and Contact records and checks if the expected number of Contact records were created for each family group.
 
-##How to Use
+<h3>How to Use</h3>
 To use this class, you need to have access to a Salesforce org and have the necessary permissions to create Apex classes and execute anonymous Apex.
 
 Copy the code of the Contacts and Main classes.
