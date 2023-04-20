@@ -6,49 +6,13 @@ public with sharing class Contacts {
 
         List<String> lastNameGetFamily = getFamilies(lastName);
         List<Account> accs = [SELECT Id, Name, (SELECT Id, FirstName, LastName, AccountId FROM Contacts) FROM Account WHERE Name IN :lastNameGetFamily]; //retorna os ids de cada nome da lista que recebe o metodo getFamilies
-        List<Account> newAccounts = new List<Account>();
-        List<String> accountsName = new List<String>();
 
-        //nao escontrar alguma familia, criar a que falta
-        //if families does not contain last name do something
-        //cria conta com o last name que na tem
-
-        for (Account acc : accs) {
-            accountsName.add(acc.Name);
-        }
-        if (!lastNameGetFamily.equals(accountsName)) {
-            Set<String> lastNameSet = new Set<String>(lastNameGetFamily); //copia lista de lastNameGetFam e torna um set
-            lastNameSet.removeAll(accountsName);
-            List<String> accsMissing = new List<String>(lastNameSet); //transforma set em list
-            system.debug('removendo os valores iguais e deixando os diferentes em lastName get family' + accsMissing);
-            for (String accName : accsMissing) {
-                Account account = new Account(Name = accName);
-                newAccounts.add(account); //insere na lista pra fazer insert
-                accs.add(account); //insere na lista para fazer query
-                //Contact contactForCurrentAccount = new Contact(FirstName = firstName, LastName = lastName);
-                //contactForCurrentAccount.AccountId = newAccount.Id;
-            }
-        }
-
-        //insert newAccounts;
-        system.debug(accs + ' lista de accs depois de fazer o insert de novas contas');
-
-        //criar logica pra se nao retornar todas familia do ctt, criar todas
-        if (accs.isEmpty()) {
-            for (String family : lastNameGetFamily) {
-                newAccounts.add(new Account(Name = lastName));
-            }
-            insert accs;
-        }
-
-        //adiciona na account os contacts adicionadas
         List<Contact> createdContacts = new List<Contact>();
 
         for (Account acc : accs) {
             Contact contactForCurrentAccount = new Contact(FirstName = firstName, LastName = lastName);
             contactForCurrentAccount.AccountId = acc.Id;
             createdContacts.add(contactForCurrentAccount);
-            //accountsName.add(acc.Name); //pega o nome das contas
         }
 
         return createdContacts;
