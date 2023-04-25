@@ -28,14 +28,14 @@ This method is used to execute the methods necessary to test the Contacts class,
 <h5>generateFamilies</h5>
 This method creates a list of Account records with names representing family groups, such as 'Souza', 'Silva', and 'Souza Silva'. It then calls the createMembers method of the Contacts class with different first and last name parameters for each family group, and inserts the resulting Contact records.
 
-<h4>asserts</h4>
+<h5>asserts</h5>
 This method contains the <b>test assertions</b> for the generateFamilies method. It retrieves the created Accounts and Contact records and checks if the expected number of Contact records were created for each family group.
 
-<h5ContactTriggerHandler </h5>
+<h4>ContactTriggerHandler </h4>
 This class implements the logic to send the notification. It retrieves the information from the newly inserted Contact record and creates a custom notification message that is sent to the Salesforce users.
 
 <h4>Triggers:</h4>
-<b>ContactsTrigger</b>
+<h5>ContactsTrigger</h5>
 
 This is a trigger that fires after a new Contact record is inserted, and calls the ContactTriggerHandler.afterInsert method.
 
