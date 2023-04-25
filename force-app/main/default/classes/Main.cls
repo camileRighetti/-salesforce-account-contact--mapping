@@ -8,14 +8,15 @@ public with sharing class Main {
     private static void generateFamilies() {
         Account souza = new Account(Name = 'Souza');
         Account souzaSilva = new Account(Name = 'Souza Silva');
-        Account silva = new Account(Name = 'silva');
+        //Account silva = new Account(Name = 'silva');
 
         //insere as 3 account atraves de list
-        insert new List<Account>{ silva, souza, souzaSilva };
+        insert new List<Account>{ souza, souzaSilva };
 
         List<Contact> members = new List<Contact>{};
         members.addAll(Contacts.createMembers('Ana', 'Souza')); //createMember é um metodo de Contacts e retorna uma List<Contact>
         members.addAll(Contacts.createMembers('Maria', 'Silva'));
+        system.debug('quantidade de marias na lista de members' + members);
         members.addAll(Contacts.createMembers('Ana Maria', 'Souza Silva'));
         insert members;
         //cada lista member, tera uma lista atribuida. Essa lista tera o retorno de createMember
@@ -37,6 +38,7 @@ public with sharing class Main {
 
         List<Contact> anas = [SELECT Id FROM Contact WHERE FirstName = 'Ana'];
         List<Contact> marias = [SELECT Id FROM Contact WHERE FirstName = 'Maria'];
+        system.debug('lista de marias' + marias);
         List<Contact> anasMarias = [SELECT Id, AccountId FROM Contact WHERE FirstName = 'Ana Maria' ORDER BY Account.Name ASC]; //Silva, Souza, Souza Silva
         Assert.areEqual(1, anas.size(), 'It should have created only 1 Ana: Ana Souza.');
         Assert.areEqual(1, marias.size(), 'It should have created only 1 Maria: Maria Silva.');
