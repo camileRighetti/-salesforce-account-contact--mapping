@@ -7,11 +7,11 @@ public with sharing class Contacts {
         List<String> lastNameGetFamily = getFamilies(lastName);
         List<Account> accs = [SELECT Id, Name, (SELECT Id, FirstName, LastName, AccountId FROM Contacts) FROM Account WHERE Name IN :lastNameGetFamily]; //retorna os ids de cada nome da lista que recebe o metodo getFamilies
         List<Account> newAccounts = new List<Account>();
-        List<String> accountsName = new List<String>();
+        Set<String> accountsName = new Set<String>();
 
         //nao escontrar alguma familia, criar a que falta
         //if families does not contain last name do something
-        //cria conta com o last name que na tem
+        //cria conta com o last name que nao tem
 
         for (Account acc : accs) {
             accountsName.add(acc.Name);
@@ -24,31 +24,19 @@ public with sharing class Contacts {
             for (String accName : accsMissing) {
                 Account account = new Account(Name = accName);
                 newAccounts.add(account); //insere na lista pra fazer insert
-                accs.add(account); //insere na lista para fazer query
-                //Contact contactForCurrentAccount = new Contact(FirstName = firstName, LastName = lastName);
-                //contactForCurrentAccount.AccountId = newAccount.Id;
             }
         }
 
-        //insert newAccounts;
+        insert newAccounts;
+        accs.addAll(newAccounts);
         system.debug(accs + ' lista de accs depois de fazer o insert de novas contas');
 
-        //criar logica pra se nao retornar todas familia do ctt, criar todas
-        if (accs.isEmpty()) {
-            for (String family : lastNameGetFamily) {
-                newAccounts.add(new Account(Name = lastName));
-            }
-            insert accs;
-        }
-
-        //adiciona na account os contacts adicionadas
         List<Contact> createdContacts = new List<Contact>();
 
         for (Account acc : accs) {
             Contact contactForCurrentAccount = new Contact(FirstName = firstName, LastName = lastName);
             contactForCurrentAccount.AccountId = acc.Id;
             createdContacts.add(contactForCurrentAccount);
-            //accountsName.add(acc.Name); //pega o nome das contas
         }
 
         return createdContacts;
@@ -56,23 +44,16 @@ public with sharing class Contacts {
 
     public static List<String> getFamilies(String lastName) {
         List<String> families = new List<String>();
-        List<String> lastNames = lastName.split(' '); //separa os sobrenomes exemplo silva santos, virao 2 elementos separados
+        List<String> lastNames = lastName.split(' '); //separa os sobrenomes exemplo silva santos, viram 2 elementos separados
         Integer lastNamesQuantity = lastNames.size(); //pega a quantidade de sobrenomes que estaram separados da lista acima
 
-        //para cada sobrenome na lista, o for vai rodar.
         for (Integer i = 0; i < lastNamesQuantity; i++) {
             families.addAll(buildLastNames(lastNames, lastNamesQuantity, i));
-            //adiciona na lista familia,
-            //metodo buildLastName passando como parametro lista de sobrenomes separados,
-            //qtd de sobrenome na lista, passa i lembrando que i é lastNameQtd - 1
         }
 
         return families;
     }
 
-    //passa uma lista de last names separados,
-    //passa a qtd de elementos lastName,
-    // recebe a qtd de iteracoes que sao baseadas justamente no size - 1
     // o metodo build last names ira retornar combinacoes possiveis com o sobrenome
 
     private static List<String> buildLastNames(List<String> lastNames, Integer lastNamesQuantity, Integer startingIndex) {
