@@ -1,23 +1,23 @@
-<img src="https://img.shields.io/badge/Database-SOQL-blue"> <img src="https://img.shields.io/badge/-Apex-blue"><img src=https://img.shields.io/badge/license-MIT-blue>
+<img src="https://img.shields.io/badge/Database-SOQL-blue"> <img src="https://img.shields.io/badge/-Apex-blue"> <img src= "https://img.shields.io/badge/-Trigger-blue"> <img src=https://img.shields.io/badge/license-MIT-blue>
 
 <img src="images/SalesforceCodex_Apex.png" align="right" width="300">
-<h1>Salesforce Account Related Contacts Creator</h1>
+<h1>Salesforce Account-Related Contacts Creator with Notification Trigger</h1>
 
-<b>This Salesforce Apex project provides a method to create Contact records based on the last name of a family group. The class contains two methods, one to create the Contact records and another to retrieve the family groups based on the last name.</b>
+<b>This Salesforce Apex project creates Contact records and associates them with an existing Accounts based on the last name of the Contact. It also creates new Accounts using the Contact's last name as the Account name if a matching Account does not already exist. The project includes a trigger that sends a custom notification when ever a new Contact is inserted and associated with an Account.</b>
 
 <h3>Use cases</h3>
-This project can be used in any business context that requires creating multiple Contact records based on a Account Name, such as healthcare providers or financial institutions.
+This project is a valuable tool for businesses that want to stay on top of new leads or opportunities. With its alerts for new Contact records associated with existing Accounts, teams can receive immediate notifications and take prompt action to stay up-to-date and respond quickly to new opportunities. The project is versatile and can be applied to different business contexts, such as healthcare providers or financial institutions that require creating multiple Contact records. Additionally, the project allows the creation of Contacts related to Accounts based on the last name of the Contact, providing further flexibility for businesses.
 
 <h3>Class Description</h3>
 
 <h4>Contacts</h4>
 This is the main class that contains the following methods:
 
-<h5>createMembers</h5>
-This method receives two parameters, firstName and lastName, and creates Contact records based on the family groups associated with the lastName parameter. It retrieves the family groups by calling the getFamilies method, then retrieves the Accounts associated with those family groups and creates a new Contact record for each one. The method returns a list of the created Contact records.
+<h5>createMembers(firstName, lastName)</h5> 
+This method creates Contact records based on the family groups associated with the lastName parameter. It retrieves the family groups by calling the getFamilies method, then retrieves the Accounts associated with those family groups and creates a new Contact record for each one. The method returns a list of the created Contact records.
 
-<h5>getFamilies</h5>
-This method receives a lastName parameter and returns a list of possible family group names based on the last name. It retrieves a list of last names by splitting the lastName parameter by space, and then returns all possible combinations of those last names.
+<h5>getFamilies(lastName)</h5> 
+ This method returns a list of possible family group names based on the last name. It retrieves a list of last names by splitting the lastName parameter by space and then returns all possible combinations of those last names.
 
 <h4>Main</h4>
 This is an auxiliary class that runs a sequence of methods to create and test the Contacts class. It contains the following methods:
@@ -30,6 +30,14 @@ This method creates a list of Account records with names representing family gro
 
 <h4>asserts</h4>
 This method contains the <b>test assertions</b> for the generateFamilies method. It retrieves the created Accounts and Contact records and checks if the expected number of Contact records were created for each family group.
+
+<h5ContactTriggerHandler </h5>
+This class implements the logic to send the notification. It retrieves the information from the newly inserted Contact record and creates a custom notification message that is sent to the Salesforce users.
+
+<h4>Triggers:</h4>
+<b>ContactsTrigger</b>
+
+This is a trigger that fires after a new Contact record is inserted, and calls the ContactTriggerHandler.afterInsert method.
 
 <h3>How to Use</h3>
 
@@ -49,21 +57,27 @@ This method contains the <b>test assertions</b> for the generateFamilies method.
 
 2. Now you are able to test the classes inside developer console
 
-   2.1 Past the below code inside developer console, this will execute the tests and create the necessary records.
+    2.1 Past the below code inside developer console, this will execute the tests and create the necessary records.
+
     ```apex
       Main.run();
     ```
+
     ![ezgif com-crop (4)](https://user-images.githubusercontent.com/122564426/232839610-0f9f0a67-685d-4c85-b6c8-d2c06045f254.gif)
-    
+
     Note that 3 new Accounts were insert.
 
 > Note that the Main class contains test assertions that can be used to validate the class behavior, If you want to modify the code, make sure the tests still pass after the changes.
 
 3. Verify account and it's contacts
 
-   Inside the new Accounts inserted, was also created it's related contacts.
+    Inside the new Accounts inserted, was also created it's related contacts.
 
 ![ezgif com-crop (5)](https://user-images.githubusercontent.com/122564426/232843439-22fc68fa-21ed-4555-9c08-eaa78b8519b7.gif)
+
+4. Verify the notification for each Contact created:
+
+![ezgif com-crop (6)](https://user-images.githubusercontent.com/122564426/234374291-8dbc5c7d-ca96-4243-ad97-b2c6b9eb601f.gif)
 
 ## Contributing
 
